@@ -1,0 +1,35 @@
+spring:
+  config.activate.on-profile: local
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: ${CATALOG_DB:jdbc:mysql://localhost:3306/microservice_catalog_db}
+    username: root
+    password: "{cipher}AQCuwTJ0balJxJgQt3wQTzp/fJt0QMysEx1Ns7L8A4MAlhD0+GKYRCHPJGFBGYXGMQp/b9pzazDMubiXtBjbY7PKJvtq1AsVIWf4WeCAKVYqpKdqUB3w1PiYNxj6mMLj/8FE20SZgyWFxPxp4SYbhOVXEsHS0TYtfI1J1Ni4QiXPng+yzSK9aid6D0//Y4veGIYqXF+8CN7JI4xunPeDAJjiI+uui5OeMfkJU9GWvt3BGF9zre/CQD4Fg245vMG3TwetM/qrngJkgql+0VIHgiuwqgVVSUh7mnmVMKxAQXiJ6tNTO6bj9KllUsg8UY1nzvVXLZv56xqSNhg5ZBmInM3qFUiaM5tMZQ8NEo4bMbutIGQ8T6NrTQi/jXKPqdxU+xs="
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: true
+---
+spring:
+  config.activate.on-profile: remote
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: ${CATALOG_DB:jdbc:mysql://host.docker.internal:3306/microservice_catalog_db}
+    username: root
+    password: "{cipher}AQCuwTJ0balJxJgQt3wQTzp/fJt0QMysEx1Ns7L8A4MAlhD0+GKYRCHPJGFBGYXGMQp/b9pzazDMubiXtBjbY7PKJvtq1AsVIWf4WeCAKVYqpKdqUB3w1PiYNxj6mMLj/8FE20SZgyWFxPxp4SYbhOVXEsHS0TYtfI1J1Ni4QiXPng+yzSK9aid6D0//Y4veGIYqXF+8CN7JI4xunPeDAJjiI+uui5OeMfkJU9GWvt3BGF9zre/CQD4Fg245vMG3TwetM/qrngJkgql+0VIHgiuwqgVVSUh7mnmVMKxAQXiJ6tNTO6bj9KllUsg8UY1nzvVXLZv56xqSNhg5ZBmInM3qFUiaM5tMZQ8NEo4bMbutIGQ8T6NrTQi/jXKPqdxU+xs="
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: true

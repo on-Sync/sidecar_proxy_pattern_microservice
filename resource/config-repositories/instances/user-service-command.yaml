@@ -1,0 +1,6 @@
+server:
+  port: 8033
+logging:
+  level:
+    root: INFO
+    '[com.putstack.user_service_command]': DEBUG

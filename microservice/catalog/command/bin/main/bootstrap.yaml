@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: catalog-service-command
+  config:
+    import:
+    - classpath:cloud-config-server-client.yaml
+    - classpath:key-store.yaml
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+    group:
+      "dev" : ${spring.application.name}, local
+      "stage" : ${spring.application.name}, stage
+  cloud:
+    config:
+      name: ${spring.application.name}, endpoints, rabbitmq, eureka-client, axon-client

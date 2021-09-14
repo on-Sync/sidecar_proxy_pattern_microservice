@@ -1,0 +1,4 @@
+signature:
+  token:
+    expiration: ${TOKEN_EXPIRATION:86400000}
+    secret: "{cipher}AQCa/Kx34hxcYYhiCVh6ziTczwDKgbliVjXlpanpurxlJ9ofFX8nRr+uKoJIIAwDCXoV+I75DD8YdL1dTfwq+1y3BmTnND/ip8NwC4oi26ujgETFo8it4IMbAdqPRXf25j2sk70FEfkDAZOt4xOdKLfEnrMjDd9MW48Fjzp2/QP8tl3MSANE7DbupvnFNLSEptYXXLqZjH+dRRjfYNs8cF01wEnNGmnEKwCWC2jVJP9M7rNu8LYVi5yw88nx8RFcj7hgXOTwBoUjngTK7SLCh+mmkU4jQMDmAye05FBkXXnAiBVF0r3HgAWI15tWODWmveooC2BQafqfyHt8seF8ShGzF24kiSi2q+6BtG/kttIUNZCbYfypI3sX807HDAnWj90="

@@ -1,0 +1,6 @@
+server:
+  port: 8004
+logging:
+  level:
+    '[org.axonframework]': debug
+    '[com.putstack.msa_order_service]': debug

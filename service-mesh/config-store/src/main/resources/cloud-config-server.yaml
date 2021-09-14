@@ -1,0 +1,39 @@
+spring:
+  config:
+    activate:
+      on-profile: native
+  cloud:
+    config:
+      name: ${spring.application.name}, endpoints, rabbitmq, eureka-client
+      server:
+        native:
+          search-locations:
+            - ${project.basedir}/resource/config-repositories
+            - ${project.basedir}/resource/config-repositories/{application}
+            - ${project.basedir}/resource/config-repositories/instances
+            - ${project.basedir}/resource/config-repositories/settings
+        encrypt:
+          enabled: false
+        bootstrap: true
+# INFO: Local Project Path
+project.basedir: ${user.home}/Workspace/Project/2. MSA/portfolio_msa_mono_repo\
+---
+spring:
+  config:
+    activate:
+      on-profile: remote
+  cloud:
+    config:
+      name: ${spring.application.name}, endpoints, rabbitmq, eureka-client
+      server:
+        git:
+          uri: https://github.com/on-Sync/msa-study
+          search-paths:
+            - resource/config-repositories
+            - resource/config-repositories/{application}
+            - resource/config-repositories/instances
+            - resource/config-repositories/settings
+          force-pull: true
+        encrypt:
+          enabled: false
+        bootstrap: true

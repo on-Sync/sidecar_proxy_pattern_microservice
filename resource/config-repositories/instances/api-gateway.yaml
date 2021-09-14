@@ -1,0 +1,88 @@
+server:
+  port: 8000
+logging:
+  level:
+    root: DEBUG
+spring:
+  cloud:
+    gateway:
+      # default-filters:
+      # - name: GlobalFilter
+      #   args:
+      #     baseMessage: Spring Cloud Gateway Global Filter
+      #     preLogger: true
+      #     postLogger: true
+      routes:
+      # 인증
+      - id: microservice_authentication
+        predicates:
+          - Path=/user_service/users/login
+          - Method=GET
+        uri: lb://USER-SERVICE-QUERY
+        filters:
+          - RemoveRequestHeader=Cookie
+          - RewritePath=/user_service/(?<segment>.*), /$\{segment}x
+          - AddRequestHeader=From, Putstack
+      # User Service
+      - id: user_service_command
+        predicates:
+          - Path=/user_service/users/**
+          - Method=POST, PUT, PATCH, DELETE
+        uri: lb://USER-SERVICE-COMMAND
+        filters:
+          - RemoveRequestHeader=Cookie
+          - RewritePath=/user_service/(?<segment>.*), /$\{segment}
+          - AuthorizationHeaderFilter
+          - AddRequestHeader=From, Putstack
+      - id: user_service_query
+        predicates:
+          - Path=/user_service/users/**
+          - Method=GET
+        uri: lb://USER-SERVICE-QUERY
+        filters:
+          - RemoveRequestHeader=Cookie
+          - RewritePath=/user_service/(?<segment>.*), /$\{segment}
+          - AuthorizationHeaderFilter
+          - AddRequestHeader=From, Putstack
+      # Order Service
+      - id: order_service_command
+        predicates:
+          - Path=/order_service/orders/**
+          - Method=POST, PUT, PATCH, DELETE
+        uri: lb://ORDER-SERVICE-COMMAND
+        filters:
+          - RemoveRequestHeader=Cookie
+          - RewritePath=/order_service/(?<segment>.*), /$\{segment}
+          - AuthorizationHeaderFilter
+          - AddRequestHeader=From, Putstack
+      - id: order_service_query
+        predicates:
+          - Path=/order_service/orders/**
+          - Method=GET
+        uri: lb://ORDER-SERVICE-QUERY
+        filters:
+          - RemoveRequestHeader=Cookie
+          - RewritePath=/order_service/(?<segment>.*), /$\{segment}
+          - AuthorizationHeaderFilter
+          - AddRequestHeader=From, Putstack
+      # Catalog Service
+      - id: catalog_service_command
+        predicates:
+          - Path=/catalog_service/users/**
+          - Method=POST, PUT, PATCH, DELETE
+        uri: lb://CATALOG-SERVICE-COMMAND
+        filters:
+          - RemoveRequestHeader=Cookie
+          - RewritePath=/catalog_service/(?<segment>.*), /$\{segment}
+          - AuthorizationHeaderFilter
+          - AddRequestHeader=From, Putstack
+      - id: catalog_service_query
+        predicates:
+          - Path=/catalog_service/users/**
+          - Method=GET
+        uri: lb://CATALOG-SERVICE-QUERY
+        filters:
+          - RemoveRequestHeader=Cookie
+          - RewritePath=/catalog_service/(?<segment>.*), /$\{segment}
+          - AuthorizationHeaderFilter
+          - AddRequestHeader=From, Putstack

@@ -1,0 +1,15 @@
+spring.config.activate.on-profile: local
+axon:
+  serializer:
+    general: xstream
+  axonserver:
+    enabled: true
+    servers: ${AXON_SERVER:localhost:8124}
+---
+spring.config.activate.on-profile: stage
+axon:
+  serializer:
+    general: xstream
+  axonserver:
+    enabled: true
+    servers: ${AXON_SERVER:host.docker.internal:8124}

@@ -1,0 +1,5 @@
+server:
+  port: 8013
+logging:
+  level:
+    root: INFO

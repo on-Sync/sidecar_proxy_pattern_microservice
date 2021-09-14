@@ -1,0 +1,6 @@
+server:
+  port: 8003
+logging:
+  level:
+    root: INFO
+    '[com.putstack.order_service_command]': DEBUG

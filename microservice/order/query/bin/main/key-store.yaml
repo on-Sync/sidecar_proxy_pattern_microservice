@@ -1,0 +1,13 @@
+spring.config.activate.on-profile: local
+encrypt:
+  key-store:
+    alias: apiEncryptionKey
+    location: file:///${user.home}/Workspace/Resource/keystore/msaAPIEncryptionKey.jks
+    password: storepass1234
+---
+spring.config.activate.on-profile: stage
+encrypt:
+  key-store:
+    alias: apiEncryptionKey
+    location: classpath:/keystore/EncryptionKey.jks
+    password: storepass1234

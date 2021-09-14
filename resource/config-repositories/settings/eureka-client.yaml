@@ -1,0 +1,15 @@
+spring.config.activate.on-profile: local
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+---
+spring.config.activate.on-profile: stage
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_URL:http://host.docker.internal:8761/eureka}
