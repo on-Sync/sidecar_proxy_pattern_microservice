@@ -1,0 +1,73 @@
+buildscript {
+    ext {
+        springBootVersion = '2.5.4'
+    }
+    
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE"
+    }
+}
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+allprojects {
+    
+    group 'com.putstack'
+    version '0.0.1-SNAPSHOT'
+    sourceCompatibility = JavaVersion.VERSION_11
+
+    tasks.register('hello') {
+        doLast {
+            println "I'm $task.project.name"
+            println project.projectDir.getName();
+        }
+    }
+}
+
+subprojects {
+    
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    ext {
+        springCloudVersion = "2020.0.3"
+    }
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+    
+    // if (project.projectDir.getName().startsWith("microservice")) {
+    //     dependencies {
+    //         compile project(':cqrs_core_api')
+    //     }
+    // }
+
+	dependencies {
+		compileOnly 'org.projectlombok:lombok:1.18.20'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+        implementation 'org.springframework.cloud:spring-cloud-config-client'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.data:spring-data-rest-hal-explorer'
+        implementation 'org.springframework.boot:spring-boot-devtools'
+	}
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+}

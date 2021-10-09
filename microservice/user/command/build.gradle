@@ -8,7 +8,32 @@ plugins {
 }
 
 dependencies {
-    implementation project(':cqrs_core_api')
+
+    implementation 'org.springframework.security:spring-security-rsa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+
+    implementation 'org.axonframework:axon-spring-boot-starter:4.5.3'
+    implementation 'org.axonframework.extensions.springcloud:axon-springcloud-spring-boot-starter:4.4'
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.4'
+    implementation 'com.google.guava:guava:30.1.1-jre'
+    implementation 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
+
+    runtimeOnly 'com.h2database:h2:1.4.200'
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus:1.7.3'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.26'
 }
 
 description = 'Command'
