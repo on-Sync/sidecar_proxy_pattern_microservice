@@ -16,14 +16,14 @@ services:
     deploy:
       replicas: 2
     ports:
-      - "9000"
+      - "8999"
   discovery:
     image: putstack/discovery
     restart: on-failure
     networks:
       - spring-cloud-network
     environment:
-      - CONFIG_STORE_URL=http://config-store:9000
+      - CONFIG_STORE_URL=http://config-store:8999
     ports:
       - "8761:8761"
     depends_on:
@@ -34,7 +34,7 @@ services:
     networks:
       - spring-cloud-network
     environment:
-      - CONFIG_STORE_URL=http://config-store:9000
+      - CONFIG_STORE_URL=http://config-store:8999
       - EUREKA_URL=http://discovery:8761/eureka
     ports:
       - "8000:8000"
@@ -48,7 +48,7 @@ services:
     networks:
       - spring-cloud-network
     environment:
-      - CONFIG_STORE_URL=http://config-store:9000
+      - CONFIG_STORE_URL=http://config-store:8999
       - EUREKA_URL=http://discovery:8761/eureka
       - AXON_SERVER=axon-server:8124
       - RABBITMQ_HOST=rabbitmq-server
@@ -62,7 +62,7 @@ services:
     networks:
       - spring-cloud-network
     environment:
-      - CONFIG_STORE_URL=http://config-store:9000
+      - CONFIG_STORE_URL=http://config-store:8999
       - EUREKA_URL=http://discovery:8761/eureka
       - AXON_SERVER=axon-server:8124
       - RABBITMQ_HOST=rabbitmq-server
@@ -77,7 +77,7 @@ services:
     networks:
       - spring-cloud-network
     environment:
-      - CONFIG_STORE_URL=http://config-store:9000
+      - CONFIG_STORE_URL=http://config-store:8999
       - EUREKA_URL=http://discovery:8761/eureka
       - AXON_SERVER=axon-server:8124
       - RABBITMQ_HOST=rabbitmq-server
@@ -91,7 +91,7 @@ services:
     networks:
       - spring-cloud-network
     environment:
-      - CONFIG_STORE_URL=http://config-store:9000
+      - CONFIG_STORE_URL=http://config-store:8999
       - EUREKA_URL=http://discovery:8761/eureka
       - AXON_SERVER=axon-server:8124
       - RABBITMQ_HOST=rabbitmq-server
@@ -106,7 +106,7 @@ services:
     networks:
       - spring-cloud-network
     environment:
-      - CONFIG_STORE_URL=http://config-store:9000
+      - CONFIG_STORE_URL=http://config-store:8999
       - EUREKA_URL=http://discovery:8761/eureka
       - AXON_SERVER=axon-server:8124
       - RABBITMQ_HOST=rabbitmq-server
@@ -120,7 +120,7 @@ services:
     networks:
       - spring-cloud-network
     environment:
-      - CONFIG_STORE_URL=http://config-store:9000
+      - CONFIG_STORE_URL=http://config-store:8999
       - EUREKA_URL=http://discovery:8761/eureka
       - AXON_SERVER=axon-server:8124
       - RABBITMQ_HOST=rabbitmq-server

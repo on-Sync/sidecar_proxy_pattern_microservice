@@ -70,4 +70,8 @@ subprojects {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         }
     }
+
+    bootJar {
+        destinationDirectory = file(project.rootProject.buildDir)
+    }
 }

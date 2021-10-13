@@ -1,5 +1,5 @@
 server:
-  port: 8034
+  port: ${PORT:8034}
 logging:
   level:
     root: INFO

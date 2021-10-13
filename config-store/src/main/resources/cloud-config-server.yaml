@@ -4,7 +4,7 @@ spring:
       on-profile: native
   cloud:
     config:
-      name: ${spring.application.name}, endpoints, rabbitmq, eureka-client
+      name: ${spring.application.name}, endpoints, rabbitmq
       server:
         native:
           search-locations:
@@ -26,10 +26,10 @@ spring:
       
   cloud:
     config:
-      name: ${spring.application.name}, endpoints, rabbitmq, eureka-client
+      name: ${spring.application.name}, endpoints, rabbitmq
       server:
         git:
-          uri: https://github.com/on-Sync/msa-study
+          uri: https://github.com/on-Sync/sidecar_proxy_pattern_microservice
           search-paths:
             - resource/config-repositories
             - resource/config-repositories/{application}

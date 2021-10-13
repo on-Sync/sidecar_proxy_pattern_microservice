@@ -3,17 +3,20 @@
 ARG APP
 ARG PROFILE=${PROFILE:-stage}
 ARG VERSION=${VERSION:-*}
+ARG CI=${CI:-docker}
 
 # ---------------------------------------------builder
 
-FROM maven as builder
+FROM gradle:7-jdk11 as builder
 ARG APP
 ARG PROFILE
+ARG CI
 ENV SPRING_PROFILES_ACTIVE=${PROFILE}
-COPY --chown=maven:maven . /home/maven/src
-WORKDIR /home/maven/src
+ENV CI=${CI}
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
 COPY resource/keystore/EncryptionKey.jks ${APP}/src/main/resources/keystore/EncryptionKey.jks
-RUN mvn clean package -f pom.xml -pl ${APP} -am
+RUN ./gradlew build -p ${APP}
 
 # ---------------------------------------------deployment
 
@@ -24,6 +27,6 @@ ARG VERSION
 ENV SPRING_PROFILES_ACTIVE=${PROFILE}
 VOLUME [ "/data" ]
 RUN mkdir /app
-COPY --from=builder /home/maven/src/${APP}/target/*-${VERSION}.jar /app/spring-boot-application.jar
+COPY --from=builder /home/gradle/src/build/*-${VERSION}.jar /app/spring-boot-application.jar
 RUN echo "SPRING_PROFILES_ACTIVE : ${SPRING_PROFILES_ACTIVE}"
 ENTRYPOINT [ "java", "-jar", "/app/spring-boot-application.jar"]

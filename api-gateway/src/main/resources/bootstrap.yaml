@@ -12,4 +12,4 @@ spring:
       "stage" : ${spring.application.name}, stage
   cloud:
     config:
-      name: ${spring.application.name}, endpoints, rabbitmq, eureka-client, token
+      name: ${spring.application.name}, endpoints, rabbitmq, token

@@ -1,7 +1,6 @@
 rootProject.name = 'sidecar_proxy_pattern_microservice'
 
 include ':config-store',
-        ':discovery',
         ':api-gateway',
         ':cqrs_core_api'//,
         // ':user_service_command',
@@ -11,8 +10,7 @@ include ':config-store',
         // ':order_service_command',
         // ':order_service_query'
 
-project(":config-store").projectDir = file('service-mesh/config-store')
-project(":discovery").projectDir = file('service-mesh/discovery')
+project(":config-store").projectDir = file('config-store')
 project(":cqrs_core_api").projectDir = file('microservice/cqrs_core_api')
 // project(":user_service_command").projectDir = file('microservice/user/command')
 // project(":user_service_query").projectDir = file('microservice/user/query')
@@ -20,3 +18,19 @@ project(":cqrs_core_api").projectDir = file('microservice/cqrs_core_api')
 // project(":catalog_service_query").projectDir = file('microservice/catalog/query')
 // project(":order_service_command").projectDir = file('microservice/order/command')
 // project(":order_service_query").projectDir = file('microservice/order/query')
+
+
+
+// docker run --name gradle-build-cache-node --detach -p 5071:5071 gradle/build-cache-node start
+buildCache {
+    println "buildCache : " + System.getenv("CI")
+    local {
+        enabled = (System.getenv("CI") == null)
+    }
+    remote(HttpBuildCache) {
+        push = (System.getenv("CI") == "docker")
+        url = 'http://host.docker.internal:5071/cache/'
+        allowUntrustedServer = true
+        allowInsecureProtocol = true
+    }
+}

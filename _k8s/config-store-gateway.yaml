@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-spirng-project-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+    
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: istio-spirng-project-vs
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio-spirng-project-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /config-server
+    route:
+    - destination:
+        host: config-store-svc
+        port:
+          number: 9000

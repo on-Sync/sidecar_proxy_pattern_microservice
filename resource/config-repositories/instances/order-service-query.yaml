@@ -1,5 +1,5 @@
 server:
-  port: 8004
+  port: ${PORT:8004}
 logging:
   level:
     '[org.axonframework]': debug
