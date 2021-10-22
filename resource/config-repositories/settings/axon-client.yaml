@@ -1,5 +1,7 @@
 spring.config.activate.on-profile: local
 axon:
+  axonserver:
+    enabled: false
   amqp:
     exchange: exchange
   eventhandling:
