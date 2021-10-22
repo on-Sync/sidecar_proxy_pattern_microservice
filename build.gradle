@@ -48,7 +48,7 @@ subprojects {
         mavenCentral()
     }
     
-    // if (project.projectDir.getName().startsWith("microservice")) {
+    // if (project.projectDir.toString().contains("microservice")) {
     //     dependencies {
     //         compile project(':cqrs_core_api')
     //     }
@@ -63,6 +63,8 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
         implementation 'org.springframework.data:spring-data-rest-hal-explorer'
         implementation 'org.springframework.boot:spring-boot-devtools'
+        
+        implementation project(':cqrs_core_api')
 	}
 
     dependencyManagement {

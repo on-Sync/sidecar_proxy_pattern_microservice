@@ -2,9 +2,9 @@ rootProject.name = 'sidecar_proxy_pattern_microservice'
 
 include ':config-store',
         ':api-gateway',
-        ':cqrs_core_api'//,
-        // ':user_service_command',
-        // ':user_service_query',
+        ':cqrs_core_api',
+        ':user_service_command',
+        ':user_service_query'//,
         // ':catalog_service_command',
         // ':catalog_service_query',
         // ':order_service_command',
@@ -12,8 +12,8 @@ include ':config-store',
 
 project(":config-store").projectDir = file('config-store')
 project(":cqrs_core_api").projectDir = file('microservice/cqrs_core_api')
-// project(":user_service_command").projectDir = file('microservice/user/command')
-// project(":user_service_query").projectDir = file('microservice/user/query')
+project(":user_service_command").projectDir = file('microservice/user/command')
+project(":user_service_query").projectDir = file('microservice/user/query')
 // project(":catalog_service_command").projectDir = file('microservice/catalog/command')
 // project(":catalog_service_query").projectDir = file('microservice/catalog/query')
 // project(":order_service_command").projectDir = file('microservice/order/command')

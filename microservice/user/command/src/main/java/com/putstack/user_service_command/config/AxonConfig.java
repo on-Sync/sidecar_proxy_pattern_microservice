@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.putstack.user_service_command.aggregate.UserAggregate;
+import com.rabbitmq.client.Channel;
 
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.commandhandling.SimpleCommandBus;
@@ -18,8 +19,12 @@ import org.axonframework.eventsourcing.GenericAggregateFactory;
 import org.axonframework.eventsourcing.SnapshotTriggerDefinition;
 import org.axonframework.eventsourcing.Snapshotter;
 import org.axonframework.eventsourcing.eventstore.EventStore;
+import org.axonframework.extensions.amqp.eventhandling.AMQPMessageConverter;
+import org.axonframework.extensions.amqp.eventhandling.spring.SpringAMQPMessageSource;
 import org.axonframework.modelling.command.Repository;
 import org.axonframework.springboot.autoconfig.AxonAutoConfiguration;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +39,18 @@ public class AxonConfig {
 
     private final static int SNAPSHOT_THRESHOLD = 5; 
     
+
+    @Bean
+    public SpringAMQPMessageSource myQueueMessageSource(AMQPMessageConverter messageConverter) {
+        return new SpringAMQPMessageSource(messageConverter) {
+
+            @RabbitListener(queues = "myQueue")
+            @Override
+            public void onMessage(Message message, Channel channel) {
+                super.onMessage(message, channel);
+            }
+        };
+    }
 
     // @Bean
 	// @Primary

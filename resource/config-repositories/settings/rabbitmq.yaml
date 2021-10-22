@@ -1,7 +1,7 @@
 spring:
   config.activate.on-profile: local
   rabbitmq:
-    host: ${RABBITMQ_HOST:localhost}
+    host: ${RABBITMQ_HOST:rabbitmq.local}
     port: ${RABBITMQ_PORT:5672}
     username: guest
     password: "{cipher}AQAfKIFa9IoFeWw0G+MDxpmNW1QD6Gzjxis2w3XdH+yuBEkaGmRD2h4zyG9ZPjCMjPRVNWtLeOVHVOQT/qoGEZOVaiR4IuvSC6hMXTMfPJEEx/dvdlfiaJAfwxYymNhwR+pXH4J1UHbrEdvQyCXWJYU3PXJ3hi5phCORklZFiwaIXyX6mONphtZ9OS2PIbiL7JIYb1radiWwSkGLCdbwM0GVARfM6aCVlbsTN2QrZM1Q3/9LZ0SJ0B0QOsW/IlLg3miOfLZ50+Q1d+6gM8BG+OuXQsGvZY+F8SrSNrAL0+CEufqgA6njfaeFvi8/6mFJdnzfdMD4d4r8gFFQTbIcAv0JMZHs3pmwtLm9qJKDEABFambYlFlz7je1VTohp6ioNmA="

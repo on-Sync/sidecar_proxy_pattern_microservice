@@ -1,10 +1,12 @@
 spring.config.activate.on-profile: local
 axon:
-  serializer:
-    general: xstream
-  axonserver:
-    enabled: true
-    servers: ${AXON_SERVER:localhost:8124}
+  amqp:
+    exchange: exchange
+  eventhandling:
+    processors:
+      amqpEvents:
+        source: amqpMessageSource
+        mode: subscribing
 ---
 spring.config.activate.on-profile: stage
 axon:

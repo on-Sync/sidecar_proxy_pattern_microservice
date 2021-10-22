@@ -3,7 +3,7 @@ spring:
     activate.on-profile: local
   cloud:
     config:
-      uri: ${CONFIG_STORE_URL:http://localhost:8999}
+      uri: ${CONFIG_STORE_URL:http://config-store.local}
       fail-fast: true
 ---
 spring:
