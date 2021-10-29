@@ -3,8 +3,10 @@ package com.putstack.user_service_command.service;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-import com.putstack.cqrs_axon_common.commands.UserCreationCommand;
-import com.putstack.user_service_command.dto.UserDTO;
+import com.putstack.cqrs_axon_common.user.commands.UserCreationCommand;
+import com.putstack.cqrs_axon_common.user.dto.UserDTO;
+import com.putstack.cqrs_axon_common.user.entity.Membership;
+import com.putstack.cqrs_axon_common.user.entity.UserAddress;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -30,8 +32,22 @@ public class UserCommandServiceImpl implements UserCommandService {
             PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(userDTO.getPassword()),
             userDTO.getName(),
             userDTO.getAge(),
+            userDTO.getSsn(),
             userDTO.getAddress(),
-            userDTO.getSsn()
+            userDTO.getMembership()
         ));
+    }
+
+    @Override
+    public CompletableFuture<String> updateUser(UserDTO userDTO) {
+        // TODO Auto-generated method stub
+
+        return null;
+    }
+
+    @Override
+    public CompletableFuture<String> deleteUser(UserDTO userDTO) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

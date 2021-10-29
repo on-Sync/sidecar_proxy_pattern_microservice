@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javax.persistence.EntityNotFoundException;
 
-import com.putstack.user_service_query.entity.UserSummary;
+import com.putstack.cqrs_axon_common.user.entity.UserDetail;
 import com.putstack.user_service_query.query.UserQuery;
 import com.putstack.user_service_query.repository.UserRepository;
 
@@ -38,23 +38,23 @@ public class QueryServiceImpl implements QueryService {
     }
 
     @Override
-    public UserSummary getUserInfo(String orderId) {
-        return gateway.query(new UserQuery(orderId), UserSummary.class).join();
+    public UserDetail getUserInfo(String orderId) {
+        return gateway.query(new UserQuery(orderId), UserDetail.class).join();
     }
     
     @Override
-    public UserSummary findByEmail(String email) throws EntityNotFoundException {
+    public UserDetail findByEmail(String email) throws EntityNotFoundException {
         return repository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException());
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         // Repository
-        UserSummary userSummary = repository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
+        UserDetail UserDetail = repository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
         // Return
         return new User(
-            userSummary.getEmail(),
-            userSummary.getPassword(),
+            UserDetail.getEmail(),
+            UserDetail.getPassword(),
             true, // enabled
             true, // accountNonExpired
             true, // credentialsNonExpired  

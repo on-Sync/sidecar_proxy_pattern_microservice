@@ -3,8 +3,10 @@ package com.putstack.user_service_query.projection;
 import java.time.Instant;
 import java.util.NoSuchElementException;
 
-import com.putstack.cqrs_axon_common.events.UserCreationEvent;
-import com.putstack.user_service_query.entity.UserSummary;
+import javax.transaction.Transactional;
+
+import com.putstack.cqrs_axon_common.user.entity.UserDetail;
+import com.putstack.cqrs_axon_common.user.events.UserCreationEvent;
 import com.putstack.user_service_query.query.UserQuery;
 import com.putstack.user_service_query.repository.UserRepository;
 
@@ -37,10 +39,11 @@ public class UserProjection {
 
     @EventHandler
     @AllowReplay
+    @Transactional
     public void on(UserCreationEvent event, @Timestamp Instant instant) {
-        log.debug("projection {}, timestamp : {}", event, instant.toString());
+        log.debug("projection {}, timestamp : {}", event.getMembership(), instant.toString());
 
-        UserSummary entity = UserSummary
+        UserDetail entity = UserDetail
                                 .builder()
                                 .userId(event.getUserId())
                                 .email(event.getEmail())
@@ -49,19 +52,22 @@ public class UserProjection {
                                 .age(event.getAge())
                                 .address(event.getAddress())
                                 .ssn(event.getSsn())
-                                .status(USER_JOINED)
+                                .address(event.getAddress())
+                                .membership(event.getMembership())
                                 .build();
+
+        // System.out.println(entity.getMembership().getMembershipId());
 
         repository.save(entity);
     }
 
     @QueryHandler
-    public UserSummary on(UserQuery query){
+    public UserDetail on(UserQuery query){
         log.debug("handling {}", query);
-        return getUserSummary(query.getUserId());
+        return getUserDetail(query.getUserId());
     }
 
-    private UserSummary getUserSummary(String userId) {
+    private UserDetail getUserDetail(String userId) {
         return repository.findById(userId)
             .orElseThrow(() -> new NoSuchElementException("사용자가 존재하지 않습니다."));
     }

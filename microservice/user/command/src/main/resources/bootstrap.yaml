@@ -12,4 +12,9 @@ spring:
       "stage" : ${spring.application.name}, stage
   cloud:
     config:
-      name: ${spring.application.name}, endpoints, rabbitmq, axon-client, persistence-user
+      name: ${spring.application.name}, endpoints, rabbitmq, persistence-user-write
+axon:
+  axonserver:
+    enabled: false
+  # amqp:
+  #   exchange: springCloudBus

@@ -2,8 +2,10 @@ package com.putstack.user_service_command.aggregate;
 
 import java.util.UUID;
 
-import com.putstack.cqrs_axon_common.commands.UserCreationCommand;
-import com.putstack.cqrs_axon_common.events.UserCreationEvent;
+import com.putstack.cqrs_axon_common.user.commands.UserCreationCommand;
+import com.putstack.cqrs_axon_common.user.entity.Membership;
+import com.putstack.cqrs_axon_common.user.entity.UserAddress;
+import com.putstack.cqrs_axon_common.user.events.UserCreationEvent;
 
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
@@ -17,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Aggregate
+@Aggregate()
 @Slf4j
 public class UserAggregate {
     @AggregateIdentifier
@@ -26,34 +28,36 @@ public class UserAggregate {
     private String password;
     private String name;
     private int age;
-    private String address;
     private String ssn;
+    private String phone;
+    private UserAddress address;
+    private Membership membership;
 
     @CommandHandler
     public UserAggregate(UserCreationCommand command) {
         log.debug("CommandHandler {}", command);
-        
         AggregateLifecycle.apply(new UserCreationEvent(
             UUID.randomUUID().toString(),
             command.getEmail(),
             command.getPassword(),
             command.getName(),
             command.getAge(),
+            command.getSsn(),
             command.getAddress(),
-            command.getSsn()
+            command.getMembership()
         ));
     }
 
     @EventSourcingHandler
     public void createUser(UserCreationEvent event) {
         log.debug("AggregateLifecycle.apply {}", event);
-
         this.userId = event.getUserId();
         this.email = event.getEmail();
         this.password = event.getPassword();
         this.name = event.getName();
         this.age = event.getAge();
-        this.address = event.getAddress();
         this.ssn = event.getSsn();
+        this.address = event.getAddress();
+        this.membership = event.getMembership();
     }
 }

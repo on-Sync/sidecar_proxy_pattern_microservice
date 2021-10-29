@@ -2,7 +2,7 @@ package com.putstack.user_service_query.controller;
 
 import javax.validation.constraints.NotBlank;
 
-import com.putstack.user_service_query.entity.UserSummary;
+import com.putstack.cqrs_axon_common.user.entity.UserDetail;
 import com.putstack.user_service_query.service.QueryService;
 
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/users/{userId}")
-    public ResponseEntity<UserSummary> getUserInfo(@PathVariable @NonNull @NotBlank String userId){
+    public ResponseEntity<UserDetail> getUserInfo(@PathVariable @NonNull @NotBlank String userId){
         return ResponseEntity.status(HttpStatus.OK)
                              .body(queryService.getUserInfo(userId));
     }

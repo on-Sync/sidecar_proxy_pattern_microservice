@@ -1,4 +1,4 @@
-package com.putstack.cqrs_axon_common.commands;
+package com.putstack.cqrs_axon_common.user.commands;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
@@ -9,11 +9,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @ToString
-public class UserCreationCommand {
+public class UserUpdateInfoCommand {
     @TargetAggregateIdentifier
     private String userId;
-    private String email;
-    private String password;
     private String name;
     private int age;
     private String address;

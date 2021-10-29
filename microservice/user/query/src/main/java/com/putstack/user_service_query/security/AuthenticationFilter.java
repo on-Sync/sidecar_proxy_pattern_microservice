@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.putstack.user_service_query.entity.UserSummary;
+import com.putstack.cqrs_axon_common.user.entity.UserDetail;
 import com.putstack.user_service_query.query.LoginQuery;
 import com.putstack.user_service_query.service.QueryService;
 
@@ -70,7 +70,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         // super.successfulAuthentication(request, response, chain, authResult);
 
         String authEmail = ((User)authResult.getPrincipal()).getUsername();
-        UserSummary authUser = queryService.findByEmail(authEmail);
+        UserDetail authUser = queryService.findByEmail(authEmail);
         
         String access_token = Jwts.builder()
             .setSubject(authUser.getUserId())
